@@ -18,7 +18,7 @@ are available in the following region(s)
 
 ### Fitcycle AMIs
 
-** us-east-1 (N. Virginia)
+** us-east-1 (N. Virginia) **
 
     web="ami-0424ce05e6eac4d44"
     mgmt="ami-0d76cd17342ed4df5"
@@ -166,6 +166,12 @@ Run the command `source export_keys.sh`
 public IP addresses of the **web** VM.
 
 
+## Destroying the infrastructure
+
+- Run the command `terraform destroy --var-file=terraform.tfvars --auto-approve`
+- If prompted for any input variable, you can enter ANY value. This is currently a bug with terraform.
+
+
 ## Troubleshooting
 
 ### Unable to access http://{WEB_PUBLIC_IP} 
@@ -184,8 +190,3 @@ public IP addresses of the **web** VM.
 - Run this command `./inventory/ec2.py --refresh-cache`
 - Repeat step 11
 
-## Destroying the infrastructure
-
-- Run the command `terraform destroy --var-file=terraform.tfvars --auto-approve`
-- If prompted for any input variable, you can enter ANY value. This is currently a bug with terraform. 
-  
