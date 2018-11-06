@@ -27,7 +27,7 @@ are available in the following region(s)
 ** us-east-1 (N. Virginia) **
 
     web="ami-0424ce05e6eac4d44"
-    mgmt="ami-0d76cd17342ed4df5"
+    mgmt="ami-038b4ad4af4ce7e8d"
     dblb="ami-0c287d8bb736b0dc4"
     db="ami-03442710b971503b5"
     app="ami-0c5a97dcec802ce81"
