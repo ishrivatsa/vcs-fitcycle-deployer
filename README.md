@@ -24,7 +24,7 @@ are available in the following region(s)
 
 ### Fitcycle AMIs
 
-** us-east-1 (N. Virginia) **
+**us-east-1 (N. Virginia)**
 
     web="ami-0424ce05e6eac4d44"
     mgmt="ami-038b4ad4af4ce7e8d"
@@ -32,6 +32,16 @@ are available in the following region(s)
     db="ami-03442710b971503b5"
     app="ami-0c5a97dcec802ce81"
     api="ami-04aba6a14439a24d2"
+
+
+**us-west-1 (N. California)**
+
+    web="ami-029218bb923933d1a"
+    mgmt="ami-062cb5ad38acd48a0"
+    dblb="ami-06eb4b1fd6d3fa7f7"
+    db="ami-001af27175ceb5c1d"
+    app="ami-0cbde20c9254f27cf"
+    api="ami-013c6f058d5323ba3"
 
 
 ## Instructions
@@ -141,7 +151,13 @@ costcenter = "acmefitness-eng"
 
 7. Run `terraform apply -var-file=terraform.tfvars` to deploy your infrastructure. 
 
-** Alternatively, you may also run `terraform apply -var-file=terraform.tfvars --auto-approve` . This will execute terraform without need for an additional approval step.
+**Alternatively, you may also run `terraform apply -var-file=terraform.tfvars --auto-approve` . This will execute terraform without need for an additional approval step.**
+
+
+**You can also execute deployment on different regions by using multiple `.tfvars` file and providing different inputs
+
+For example : `terraform apply -var-file=terraform.tfvars -var-file=us_west_1_terraform.tfvars`
+
 
 8. Enter the values for various variables when prompted
 
@@ -161,14 +177,13 @@ var.multi_az_rds = 0
 
 ```
 
-**For deployment with AWS RDS - multi-az**
+**For deployment with AWS RDS - multi-az** [This deployment can take upto ~ 15 mins]
 
 ```
 var.use_rds_database = 1
 var.multi_az_rds = 1
 
 ```
-
 
 9. Once **Terraform** has successfuly completed execution, wait for coupe of minutes and then SSH into the management VM 
 or the jumpbox. 
