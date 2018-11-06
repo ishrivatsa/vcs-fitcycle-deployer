@@ -7,6 +7,12 @@
 These instructions will allow you to get a copy of the project and deploy Fitcycle application in AWS. It will
 also configure the instances. 
 
+The app can be deployed with 2 different architectures
+
+1. With MySql database on a VM and a HA Proxy to load balance between databases
+
+2. AWS RDS as a database with or without multi-az mode (multi-az is recommended mode) 
+
 See notes below for troubleshooting.
 
 ## Requirements:
@@ -137,7 +143,34 @@ costcenter = "acmefitness-eng"
 
 ** Alternatively, you may also run `terraform apply -var-file=terraform.tfvars --auto-approve` . This will execute terraform without need for an additional approval step.
 
-8. Once **Terraform** has successfuly completed execution, wait for coupe of minutes and then SSH into the management VM 
+8. Enter the values for various variables when prompted
+
+**For deployment with MySql on a VM and HA Proxy **
+
+```
+var.use_rds_database = 0
+var.multi_az_rds = 0
+
+```
+
+**For deployment with AWS RDS - single az**
+
+```
+var.use_rds_database = 1
+var.multi_az_rds = 0
+
+```
+
+**For deployment with AWS RDS - multi-az**
+
+```
+var.use_rds_database = 1
+var.multi_az_rds = 1
+
+```
+
+
+9. Once **Terraform** has successfuly completed execution, wait for coupe of minutes and then SSH into the management VM 
 or the jumpbox. 
 
 You can login into your AWS console to get the Public IP address for the Management (mgmt) box or you can run the
@@ -152,24 +185,24 @@ web2_public_ip = 35.173.211.14
 
 ```
 
-9. The mgmt/jumpbox is pre-baked with the ansible templates. Change the directory `fitcycle_ansible`
+10. The mgmt/jumpbox is pre-baked with the ansible templates. Change the directory `fitcycle_ansible`
 
-10. Edit the file export_keys.sh and provide the details for AWS ACCESS KEY and AWS SECRET ACCESS KEY. Then 
+11. Edit the file export_keys.sh and provide the details for AWS ACCESS KEY and AWS SECRET ACCESS KEY. Then 
 
 Run the command `source export_keys.sh`
 
-11. Run this command
+12. Run this command
     
      `ansible-playbook configure_fitcycle.yml -e 'db_user=db_app_user db_password=VMware1!' -vvv`
 
-12. Once ansible completes configuring successfully, you can go to a web browser and access the app with any of the 
+13. Once ansible completes configuring successfully, you can go to a web browser and access the app with any of the 
 public IP addresses of the **web** VM.
 
 
 ## Destroying the infrastructure
 
-- Run the command `terraform destroy --var-file=terraform.tfvars --auto-approve`
-- If prompted for any input variable, you can enter ANY value. This is currently a bug with terraform.
+14.  Run the command `terraform destroy --var-file=terraform.tfvars --auto-approve`
+     - If prompted for any input variable provide the values.  This is currently a bug with terraform.
 
 
 ## Troubleshooting
@@ -181,12 +214,12 @@ public IP addresses of the **web** VM.
 
 ### Unable to access http://{WEB_PUBLIC_IP}/api/v1.0/signups 
 
-- Repeat step 11 and wait for a few minutes 
+- Repeat step 12 and wait for a few minutes 
 - Ensure that the url path is correct
 
 ### skipping: no hosts matched
 
-- Repeat step 10 and Ensure the values for `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` are set.
+- Repeat step 11 and Ensure the values for `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` are set.
 - Run this command `./inventory/ec2.py --refresh-cache`
-- Repeat step 11
+- Repeat step 12
 
