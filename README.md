@@ -145,7 +145,7 @@ costcenter = "acmefitness-eng"
 
 8. Enter the values for various variables when prompted
 
-**For deployment with MySql on a VM and HA Proxy **
+**For deployment with MySql on a VM and HA Proxy**
 
 ```
 var.use_rds_database = 0
