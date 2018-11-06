@@ -1,5 +1,8 @@
 # Variables for accepting Access Key and Secret key for AWS
 # Default region is set to us-east-1
+
+variable "use_rds_database" {}
+variable "multi_az_rds" {}
 variable "aws_access_key" {}
 variable "aws_secret_key" {}
 variable "region" {
@@ -9,7 +12,7 @@ variable "images" {
   type = "map"
   default = {
     web="ami-0424ce05e6eac4d44"
-    mgmt="ami-0d76cd17342ed4df5"
+    mgmt="ami-0d09699c3879b47a6"
     dblb="ami-0c287d8bb736b0dc4"
     db="ami-03442710b971503b5"
     app="ami-0c5a97dcec802ce81"
