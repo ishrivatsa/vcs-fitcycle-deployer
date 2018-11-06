@@ -124,12 +124,12 @@ region = "us-east-1"
 
 images = {
 
-    web="ami-0424ce05e6eac4d44"
-    mgmt="ami-0d76cd17342ed4df5"
-    dblb="ami-0c287d8bb736b0dc4"
-    db="ami-03442710b971503b5"
-    app="ami-0c5a97dcec802ce81"
-    api="ami-04aba6a14439a24d2"
+    web="ami-029218bb923933d1a"
+    mgmt="ami-062cb5ad38acd48a0"
+    dblb="ami-06eb4b1fd6d3fa7f7"
+    db="ami-001af27175ceb5c1d"
+    app="ami-0cbde20c9254f27cf"
+    api="ami-013c6f058d5323ba3"
 }
 
 aws_vpc_name = "fitcycleDemo"
