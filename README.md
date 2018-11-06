@@ -185,7 +185,11 @@ web2_public_ip = 35.173.211.14
 
 ```
 
-10. The mgmt/jumpbox is pre-baked with the ansible templates. Change the directory `fitcycle_ansible`
+10. The mgmt/jumpbox is pre-baked with the ansible templates. 
+
+**Change the directory to `fitcycle_ansible`** for deployment with MySQL and HA Proxy 
+
+**Change the directory to `fitcycle_ansible_with_rds`** for deployment with AWS RDS
 
 11. Edit the file export_keys.sh and provide the details for AWS ACCESS KEY and AWS SECRET ACCESS KEY. Then 
 
@@ -195,7 +199,6 @@ Run the command `source export_keys.sh`
     
      `ansible-playbook configure_fitcycle.yml -e 'db_user=db_app_user db_password=VMware1!' -vvv`
 
-**NOTE**: Ansible support for RDS based ddeployment will be added soon
 
 13. Once ansible completes configuring successfully, you can go to a web browser and access the app with any of the 
 public IP addresses of the **web** VM.
