@@ -211,6 +211,20 @@ web2_public_ip = 35.173.211.14
 
 Run the command `source export_keys.sh`
 
+12. Update the `inventort/ec2.ini` file for the specific region in which the deployment occurs. 
+ 
+```
+[ec2]
+
+#regions= us-west-1
+#regions_exclude = us-gov-west-1
+
+regions= <SPECIFY THE REGION IN WHICH THE APP WAS DEPLOYED>
+regions_exclude = us-gov-west-1
+
+```
+
+
 12. Run this command
     
      `ansible-playbook configure_fitcycle.yml -e 'db_user=db_app_user db_password=VMware1!' -vvv`
