@@ -211,7 +211,7 @@ web2_public_ip = 35.173.211.14
 
 Run the command `source export_keys.sh`
 
-12. Update the `inventort/ec2.ini` file for the specific region in which the deployment occurs. 
+12. Update the `inventory/ec2.ini` file for the specific region in which the deployment occurs. 
  
 ```
 [ec2]
@@ -225,18 +225,18 @@ regions_exclude = us-gov-west-1
 ```
 
 
-12. Run this command
+13. Run this command
     
      `ansible-playbook configure_fitcycle.yml -e 'db_user=db_app_user db_password=VMware1!' -vvv`
 
 
-13. Once ansible completes configuring successfully, you can go to a web browser and access the app with any of the 
+14. Once ansible completes configuring successfully, you can go to a web browser and access the app with any of the 
 public IP addresses of the **web** VM.
 
 
 ## Destroying the infrastructure
 
-14.  Run the command `terraform destroy --var-file=terraform.tfvars --auto-approve`
+15.  Run the command `terraform destroy --var-file=terraform.tfvars --auto-approve`
      - If prompted for any input variable provide the values.  This is currently a bug with terraform.
 
 
