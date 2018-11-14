@@ -116,11 +116,12 @@ costcenter = "acmefitness-eng"
 
 [OPTIONAL] If you need to use a different AMI ID(s), use the following `terraform.tfvars` file
 
+In this example, we are updating the region and the AMI IDs for that specific region.
 
 ```
 aws_access_key = " "
 aws_secret_key = " "
-region = "us-east-1"
+region = "us-west-1"
 
 images = {
 
