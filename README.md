@@ -150,9 +150,12 @@ costcenter = "acmefitness-eng"
 
 6. Run `terraform plan -var-file=terraform.tfvars` to ensure there are no errors. Fix any errors before proceeding. 
 
-7. Run `terraform apply -var-file=terraform.tfvars` to deploy your infrastructure. 
+7. Run `terraform apply -var-file=terraform.tfvars -state=terraform.tfstate` to deploy your infrastructure. 
 
-**Alternatively, you may also run `terraform apply -var-file=terraform.tfvars --auto-approve` . This will execute terraform without need for an additional approval step.**
+**It's best to provide a state file path `-state=<FILE_PATH>` , if you are planing to deploy multiple instances 
+of the entire infra**
+
+**Alternatively, you may also run `terraform apply -var-file=terraform.tfvars -state=terraform.tfstate --auto-approve` . This will execute terraform without need for an additional approval step.**
 
 
 **You can also execute deployment on different regions by using multiple `.tfvars` file and providing different inputs
@@ -236,7 +239,7 @@ public IP addresses of the **web** VM.
 
 ## Destroying the infrastructure
 
-15.  Run the command `terraform destroy --var-file=terraform.tfvars --auto-approve`
+15.  Run the command `terraform destroy -var-file=terraform.tfvars -state=terraform.tfstate --auto-approve`
      - If prompted for any input variable provide the values.  This is currently a bug with terraform.
 
 
