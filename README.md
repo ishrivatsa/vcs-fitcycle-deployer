@@ -22,6 +22,8 @@ Terraform Version: 0.11.0 +
 Ensure the correct AMIs are available in the region where the application needs to be deployed. Currently the AMIs
 are available in the following region(s)
 
+**Note: These AMIs are private. For access to these images, contact Bill Shetti, Prabhu Barathi or Shrivatsa Upadhye**
+
 ### Fitcycle AMIs
 
 **us-east-1 (N. Virginia)**
@@ -48,7 +50,7 @@ are available in the following region(s)
 
 1. Clone this repository to your local system.
 
-2. It contains 2 directories - `fitcycle_ansible` and `fitcycle_terraform`. Change directory to ` fitcycle_terraform`
+2. It contains 3 directories - `fitcycle_ansible` , `fitcycle_ansible_with_rds` and `fitcycle_terraform`. Change directory to ` fitcycle_terraform`
 
 3. Create a file name `terraform.tfvars` and populate it with the values listed below. You can also add additional
 variable values in this file (See Step 4)
