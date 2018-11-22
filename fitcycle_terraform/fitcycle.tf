@@ -18,7 +18,6 @@ resource "aws_vpc" "vcs_vpc" {
   }
 }
 
-
 resource "aws_subnet" "public_subnet" {
   vpc_id          = "${aws_vpc.vcs_vpc.id}"
   cidr_block      = "${cidrsubnet(aws_vpc.vcs_vpc.cidr_block, 8, 2)}"
@@ -512,6 +511,12 @@ resource "aws_instance" "mgmt" {
           Organization  = "${var.organization}"
           "Cost Center" = "${var.costcenter}"     
      }
+}
+
+output "vpc_id" {
+ 
+ value = "${aws_vpc.vcs_vpc.id}"
+
 }
 
 output "mgmt_public_ip" {
