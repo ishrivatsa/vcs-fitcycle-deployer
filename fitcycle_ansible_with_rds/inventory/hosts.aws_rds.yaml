@@ -1,0 +1,7 @@
+plugin: aws_rds
+regions:
+  - us-east-1
+keyed_groups:
+   - key: tags.Tier
+     separator: ''
+
