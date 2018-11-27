@@ -514,6 +514,12 @@ resource "aws_instance" "mgmt" {
      }
 }
 
+output "vpc_id" {
+ 
+ value = "${aws_vpc.vcs_vpc.id}"
+
+}
+
 output "mgmt_public_ip" {
   
  value = "${aws_instance.mgmt.public_ip}" 
