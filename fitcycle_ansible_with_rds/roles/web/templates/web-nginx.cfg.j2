@@ -63,8 +63,8 @@ http {
 
        # Provide IP address for Django Application server with the port number
         upstream appblock {
-        {% for host in groups['tag_Tier_APP'] %}
-        server {{ hostvars[host].ec2_private_ip_address }}:8000;
+        {% for host in groups['APP'] %}
+        server {{ hostvars[host].private_ip_address }}:8000;
         {% endfor %}
 
         }
@@ -72,8 +72,8 @@ http {
         # Provide IP address for Flask API  server with the port number
         upstream apiblock {
 
-        {% for host in groups['tag_Tier_API'] %}
-        server {{ hostvars[host].ec2_private_ip_address }}:5000;
+        {% for host in groups['API'] %}
+        server {{ hostvars[host].private_ip_address }}:5000;
         {% endfor %}
 
 
