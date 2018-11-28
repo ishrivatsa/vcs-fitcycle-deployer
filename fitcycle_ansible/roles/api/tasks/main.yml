@@ -23,4 +23,4 @@
 
 - name: App is deployed and ready
   debug:
-    msg: "App load balanced at following IPs: {{ groups['tag_Tier_WEB'] }}"
+    msg: "App load balanced at following IPs: {{ groups['WEB'] }}"

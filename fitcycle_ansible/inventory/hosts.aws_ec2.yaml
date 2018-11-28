@@ -1,0 +1,18 @@
+plugin: aws_ec2
+# Enter the region to deploy in
+regions:
+  - us-east-1
+
+filters:
+   instance-state-name: running
+# Enter the VPC-ID from terraform outputs or aws console
+   vpc-id: 
+
+hostnames:
+    - private-ip-address
+
+keyed_groups:
+    - key: tags.Tier
+      separator: ''
+#strict_permissions: False
+

@@ -1,17 +1,17 @@
-- hosts: "tag_Tier_APP"
+- hosts: "APP"
   become: true
   strategy: debug
   gather_facts: false
   roles:
     - app
 
-- hosts: "tag_Tier_API"
+- hosts: "API"
   become: true
   gather_facts: false
   roles:
     - api
 
-- hosts: "tag_Tier_WEB"
+- hosts: "WEB"
   gather_facts: false
   roles:
     - web

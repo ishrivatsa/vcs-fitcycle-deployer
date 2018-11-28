@@ -1,10 +1,8 @@
 # Variables for accepting Access Key and Secret key for AWS
 # Default region is set to us-east-1
 
-variable "use_rds_database" {}
-variable "multi_az_rds" {}
-variable "aws_access_key" {}
-variable "aws_secret_key" {}
+variable "option_1_aws_access_key" {}
+variable "option_2_aws_secret_key" {}
 variable "region" {
     default = "us-east-1"
 }
@@ -21,10 +19,14 @@ variable "images" {
 }
 
 
-variable "aws_vpc_name" {}
-variable "aws_vpc_cidr" {}
-variable "aws_ssh_key_name" {}
-variable "aws_public_ssh_key" {}
+variable "option_3_aws_vpc_name" {}
+variable "option_4_aws_vpc_cidr" {}
+variable "option_5_aws_ssh_key_name" {}
+variable "option_6_aws_public_ssh_key" {}
+
+variable "option_8_aws_rds_identifier" {}
+variable "option_7_use_rds_database" {}
+variable "option_9_multi_az_rds" {}
 
 variable "product" {}
 variable "team" {}

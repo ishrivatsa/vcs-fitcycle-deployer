@@ -30,6 +30,6 @@ listen mysql-cluster
     mode tcp
     #option mysql-check user root
     balance roundrobin
-    {% for host in groups['tag_Tier_DB'] %}
-    server mysql-{{ loop.index }} {{ hostvars[host]['ec2_private_ip_address'] }}:3306 check
+    {% for host in groups['DB'] %}
+    server mysql-{{ loop.index }} {{ hostvars[host]['private_ip_address'] }}:3306 check
     {% endfor %}
