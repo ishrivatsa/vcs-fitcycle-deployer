@@ -273,6 +273,9 @@ public IP addresses of the **web** VM.
 ### skipping: no hosts matched
 
 - Repeat step 11 and Ensure the values for `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` are set.
-- Run this command `./inventory/ec2.py --refresh-cache`
+- Run this command `ansible-inventory -i inventory/hosts.aws_ec2.yaml --list`
+or 
+- Run this command `ansible-inventory -i inventory/hosts.aws_ec2.yaml -i inventory/hosts.aws_rds.yaml --list`
+
 - Repeat step 12
 
