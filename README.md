@@ -1,6 +1,7 @@
-# vcs-fitcycle-deployer
+# vcs-fitcycle-deployer 
 ---------------------
 ---------------------
+Version: 1.1
 
 ## Getting Started 
 
@@ -70,12 +71,12 @@ Ensure that aws_vpc_cidr is a /8, /12, /16 network which is in accordance with R
 terraform.tfvars file
 
 ```
-aws_access_key = " "    
-aws_secret_key = " "
+option_1_aws_access_key = " "    
+option_2_aws_secret_key = " "
 region = "us-east-1"
 
-aws_vpc_name = "fitcycleDemo"
-aws_vpc_cidr = "10.0.0.0/16"
+option_3_aws_vpc_name = "fitcycleDemo"
+option_4_aws_vpc_cidr = "10.0.0.0/16"
 
 product = "fitcycle"
 team = "dev-team"
@@ -86,26 +87,26 @@ costcenter = "acmefitness-eng"
 
 ```
 
-4.[OPTIONAL] You may also set values for `aws_ssh_key_name` and `aws_public_ssh_key` within the `terraform.tfvars` file as 
+4.[OPTIONAL] You may also set values for `option_5_aws_ssh_key_name` and `option_6_aws_public_ssh_key` within the `terraform.tfvars` file as 
 shown below.
 
 ** Note that doing so can result in an error ` Existing Key Pair`, as AWS doesnot allow creation of ssh keys with
 same key name. 
 
-** Alternative to this is to just provide the `aws_public_ssh_key` in the `.tfvars` file and omit the `aws_ssh_key_name`
+** Alternative to this is to just provide the `option_6_aws_public_ssh_key` in the `.tfvars` file and omit the `aws_ssh_key_name`
 . By doing so, everytime terraform is run, you can provide a new `ssh key name`
 
 
 
 ```
-aws_access_key = " "
-aws_secret_key = " "
+option_1_aws_access_key = " "
+option_2_aws_secret_key = " "
 region = "us-east-1"
 
-aws_vpc_name = "fitcycleDemo"
-aws_vpc_cidr = "10.0.0.0/16"
-aws_ssh_key_name = "myTestKey"
-aws_public_ssh_key = " PASTE YOUR PUBLIC SSH KEY HERE - file ending with id_rsa.pub"
+option_3_aws_vpc_name = "fitcycleDemo"
+option_4_aws_vpc_cidr = "10.0.0.0/16"
+option_5_aws_ssh_key_name = "myTestKey"
+option_6_aws_public_ssh_key = " PASTE YOUR PUBLIC SSH KEY HERE - file ending with id_rsa.pub"
 
 product = "fitcycle"
 team = "dev-team"
@@ -121,8 +122,8 @@ costcenter = "acmefitness-eng"
 In this example, we are updating the region and the AMI IDs for that specific region.
 
 ```
-aws_access_key = " "
-aws_secret_key = " "
+option_1_aws_access_key = " "
+option_2_aws_secret_key = " "
 region = "us-west-1"
 
 images = {
@@ -135,8 +136,8 @@ images = {
     api="ami-013c6f058d5323ba3"
 }
 
-aws_vpc_name = "fitcycleDemo"
-aws_vpc_cidr = "10.0.0.0/16"
+option_3_aws_vpc_name = "fitcycleDemo"
+option_4_aws_vpc_cidr = "10.0.0.0/16"
 
 product = "fitcycle"
 team = "dev-team"
@@ -170,24 +171,27 @@ For example : `terraform apply -var-file=terraform.tfvars -var-file=us_west_1_te
 **For deployment with MySql on a VM and HA Proxy**
 
 ```
-var.use_rds_database = 0
-var.multi_az_rds = 0
+var.option_7_use_rds_database = 0
+var.option_8_aws_rds_identifier = 0
+var.option_9_multi_az_rds = 0
 
 ```
 
 **For deployment with AWS RDS - single az**
 
 ```
-var.use_rds_database = 1
-var.multi_az_rds = 0
+var.option_7_use_rds_database = 1
+var.option_8_aws_rds_identifier = rdsFitcycle
+var.option_9_multi_az_rds = 0
 
 ```
 
 **For deployment with AWS RDS - multi-az** [This deployment can take upto ~ 15 mins]
 
 ```
-var.use_rds_database = 1
-var.multi_az_rds = 1
+var.option_7_use_rds_database = 1
+var.option_8_aws_rds_identifier = rdsFitcycle
+var.option_9_multi_az_rds = 1
 
 ```
 
@@ -201,6 +205,7 @@ The output should look like this
 
 ```
 mgmt_public_ip = 52.90.92.175
+vpc_id = vpc-04def571849hde0
 web1_public_ip = 35.173.230.151
 web2_public_ip = 35.173.211.14
 
@@ -216,23 +221,31 @@ web2_public_ip = 35.173.211.14
 
 Run the command `source export_keys.sh`
 
-12. Update the `inventory/ec2.ini` file for the specific region in which the deployment occurs. 
+12. Update the `inventory/hosts.aws_ec2.yaml` file for the specific region in which the deployment occurs. 
  
 ```
-[ec2]
+plugin: aws_ec2
+# Enter the region to deploy in
+regions:
+  - us-east-1
 
-#regions= us-west-1
-#regions_exclude = us-gov-west-1
-
-regions= <SPECIFY THE REGION IN WHICH THE APP WAS DEPLOYED>
-regions_exclude = us-gov-west-1
+filters:
+   instance-state-name: running
+# Enter the VPC-ID from terraform outputs or aws console
+   vpc-id:
 
 ```
 
-
 13. Run this command
-    
-     `ansible-playbook configure_fitcycle.yml -e 'db_user=db_app_user db_password=VMware1!' -vvv`
+
+    **For MySql based deployment**
+
+   `ansible-playbook -i inventory/hosts.aws_ec2.yaml -e 'db_user=db_app_user db_password=VMware1!' -vvv`
+
+
+    **For RDS based deployment**
+
+     `ansible-playbook -i inventory/hosts.aws_ec2.yaml -i inventory/hosts.aws_rds.yaml configure_fitcycle.yml -e 'db_user=db_app_user db_password=VMware1!' -vvv`
 
 
 14. Once ansible completes configuring successfully, you can go to a web browser and access the app with any of the 

@@ -78,7 +78,7 @@ DATABASES = {
         'NAME': 'prospect',
         'USER': "{{db_user}}",
         'PASSWORD': "{{db_password}}",
-        'HOST': "{{ hostvars[groups['tag_Tier_DBLB'][0]].ec2_private_ip_address}}",   # Or an IP Address that your DB is hosted on
+        'HOST': "{{ hostvars[groups['DBLB'][0]].private_ip_address}}",   # Or an IP Address that your DB is hosted on
     }
 
 }
