@@ -10,7 +10,7 @@ variable "images" {
   type = "map"
   default = {
     web="ami-0424ce05e6eac4d44"
-    mgmt="ami-038b4ad4af4ce7e8d"
+    mgmt="ami-055ed7b7da5e20390"
     dblb="ami-0c287d8bb736b0dc4"
     db="ami-03442710b971503b5"
     app="ami-0c5a97dcec802ce81"
@@ -24,8 +24,8 @@ variable "option_4_aws_vpc_cidr" {}
 variable "option_5_aws_ssh_key_name" {}
 variable "option_6_aws_public_ssh_key" {}
 
-variable "option_8_aws_rds_identifier" {}
 variable "option_7_use_rds_database" {}
+variable "option_8_aws_rds_identifier" {}
 variable "option_9_multi_az_rds" {}
 
 variable "product" {}
