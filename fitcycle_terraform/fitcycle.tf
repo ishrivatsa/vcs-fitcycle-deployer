@@ -519,6 +519,12 @@ output "vpc_id" {
 
 }
 
+output "rds_arn" {
+
+ value = "${aws_db_instance.fitcycle_rds_db.*.arn}"
+
+}
+
 output "mgmt_public_ip" {
   
  value = "${aws_instance.mgmt.public_ip}" 
