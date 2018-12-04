@@ -240,7 +240,7 @@ filters:
 
     **For MySql based deployment**
 
-    `ansible-playbook -i inventory/hosts.aws_ec2.yaml -e 'db_user=db_app_user db_password=VMware1!' -vvv`
+    `ansible-playbook -i inventory/hosts.aws_ec2.yaml configure_fitcycle.yml -e 'db_user=db_app_user db_password=VMware1!' -vvv`
 
 
     **For RDS based deployment**
