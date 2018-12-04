@@ -5,5 +5,6 @@ keyed_groups:
    - key: tags.Tier
      separator: ''
 
+# Provide the ARN for the rds-db-instance. You can obtain this from Terraform output or AWS Console
 filters:
-  db-instance-identifier: rds-fitcycle
+  db-instance-id:
