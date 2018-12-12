@@ -30,7 +30,7 @@ are available in the following region(s)
 **us-east-1 (N. Virginia)**
 
     web="ami-0424ce05e6eac4d44"
-    mgmt="ami-0d597a8471c96f776"
+    mgmt="ami-09b7afbfbed29099c"
     dblb="ami-0c287d8bb736b0dc4"
     db="ami-03442710b971503b5"
     app="ami-0c5a97dcec802ce81"
@@ -40,7 +40,7 @@ are available in the following region(s)
 **us-west-1 (N. California)**
 
     web="ami-029218bb923933d1a"
-    mgmt="ami-0ef45ab3493897435"
+    mgmt="ami-048ef73aadc6c3bf6"
     dblb="ami-06eb4b1fd6d3fa7f7"
     db="ami-001af27175ceb5c1d"
     app="ami-0cbde20c9254f27cf"
@@ -129,7 +129,7 @@ region = "us-west-1"
 images = {
 
     web="ami-029218bb923933d1a"
-    mgmt="ami-0ef45ab3493897435"
+    mgmt="ami-048ef73aadc6c3bf6"
     dblb="ami-06eb4b1fd6d3fa7f7"
     db="ami-001af27175ceb5c1d"
     app="ami-0cbde20c9254f27cf"
