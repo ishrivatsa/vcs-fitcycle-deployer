@@ -10,7 +10,7 @@ variable "images" {
   type = "map"
   default = {
     web="ami-0424ce05e6eac4d44"
-    mgmt="ami-0d597a8471c96f776"
+    mgmt="ami-09b7afbfbed29099c"
     dblb="ami-0c287d8bb736b0dc4"
     db="ami-03442710b971503b5"
     app="ami-0c5a97dcec802ce81"
