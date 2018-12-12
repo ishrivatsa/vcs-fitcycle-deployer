@@ -1,30 +1,23 @@
 plugin: aws_ec2
-<<<<<<< HEAD
 =======
 # Enter the region to deploy in
->>>>>>> 8bafc3acbb888186501748ed72571667c7fe4a7f
 regions:
   - us-east-1
 
 filters:
    instance-state-name: running
-<<<<<<< HEAD
-   vpc-id: vpc-015ddc209a320359d
 =======
 # Enter the VPC-ID from terraform outputs or aws console
    vpc-id: 
 
 hostnames:
     - private-ip-address
->>>>>>> 8bafc3acbb888186501748ed72571667c7fe4a7f
 
 keyed_groups:
     - key: tags.Tier
       separator: ''
 #strict_permissions: False
 
-<<<<<<< HEAD
 compose:
     ansible_host: private_ip_address
 =======
->>>>>>> 8bafc3acbb888186501748ed72571667c7fe4a7f
