@@ -47,6 +47,12 @@ are available in the following region(s)
     api="ami-013c6f058d5323ba3"
 
 
+## High level Architecture
+
+![Fitcycle Architecture]
+(https://github.com/ishrivatsa/vcs-fitcycle-deployer/blob/master/fitcycle.png)
+
+
 ## Instructions
 
 1. Clone this repository to your local system.
