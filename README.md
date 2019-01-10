@@ -49,8 +49,7 @@ are available in the following region(s)
 
 ## High level Architecture
 
-![Fitcycle Architecture]
-(https://github.com/ishrivatsa/vcs-fitcycle-deployer/blob/master/fitcycle.png)
+![Fitcycle Architecture](https://github.com/ishrivatsa/vcs-fitcycle-deployer/blob/master/fitcycle.png)
 
 
 ## Instructions
