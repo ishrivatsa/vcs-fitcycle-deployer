@@ -154,7 +154,15 @@ costcenter = "acmefitness-eng"
 ```
 
 
-5. Run `terraform init` to ensure there are no errors. Fix any errors that are reported before proceeding.
+5. If you plan on using remote backend, such as S3, to store the state file, then Run `terraform init --backend-config="bucket=mybucket" --backend-config="key=path/to/my/key/some.tfstate" --backend-config="region=us-east-1"` 
+   to ensure there are no errors. 
+
+   **To use remote backend, Terraform will need List, Read and Put access to the bucket. Ensure that these permissions are added to the policy and assigned to the user that will be used.**
+
+   Fix any errors that are reported before proceeding.
+
+   If you plan on using local backend **[NOT RECOMMENDED]**, to store the state file, then edit the `provider.tf` file and comment the backend section.
+   Then run `terraform init`
 
 6. Run `terraform plan -var-file=terraform.tfvars` to ensure there are no errors. Fix any errors before proceeding. 
 
