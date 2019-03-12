@@ -2,6 +2,5 @@
 *.tfstate.backup
 *.terraform
 *.tfstate.*
-*.tfvars
 *.ansible
 *.plan
