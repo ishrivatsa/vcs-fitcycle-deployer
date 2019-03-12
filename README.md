@@ -95,13 +95,11 @@ costcenter = "acmefitness-eng"
 4.[OPTIONAL] You may also set values for `option_5_aws_ssh_key_name` and `option_6_aws_public_ssh_key` within the `terraform.tfvars` file as 
 shown below.
 
-** Note that doing so can result in an error ` Existing Key Pair`, as AWS doesnot allow creation of ssh keys with
-same key name. 
+**Note that doing so can result in an error ` Existing Key Pair`, as AWS doesnot allow creation of ssh keys with
+same key name.** 
 
-** Alternative to this is to just provide the `option_6_aws_public_ssh_key` in the `.tfvars` file and omit the `aws_ssh_key_name`
-. By doing so, everytime terraform is run, you can provide a new `ssh key name`
-
-
+**Alternative to this is to just provide the `option_6_aws_public_ssh_key` in the `.tfvars` file and omit the `aws_ssh_key_name`
+. By doing so, everytime terraform is run, you can provide a new `ssh key name`**
 
 ```
 option_1_aws_access_key = " "
@@ -119,9 +117,8 @@ owner = "teamlead"
 environment = "staging"
 organization = "acmefitness"
 costcenter = "acmefitness-eng"
-
-```	
-
+	
+```
 [OPTIONAL] If you need to use a different AMI ID(s), use the following `terraform.tfvars` file
 
 In this example, we are updating the region and the AMI IDs for that specific region.
@@ -153,16 +150,17 @@ costcenter = "acmefitness-eng"
 
 ```
 
+5. If you plan on using ***remote backend***, such as S3, to store the state file, then Run 
 
-5. If you plan on using remote backend, such as S3, to store the state file, then Run `terraform init --backend-config="bucket=mybucket" --backend-config="key=path/to/my/key/some.tfstate" --backend-config="region=us-east-1"` 
-   to ensure there are no errors. 
+`terraform init --backend-config="bucket=mybucket" --backend-config="key=path/to/my/key/some.tfstate" --backend-config="region=us-east-1"` 
 
-   **To use remote backend, Terraform will need List, Read and Put access to the bucket. Ensure that these permissions are added to the policy and assigned to the user that will be used.**
+**To use remote backend, Terraform will need List, Read and Put access to the bucket. Ensure that these permissions are added to the policy and assigned to the user that will be used.**
 
-   Fix any errors that are reported before proceeding.
+Fix any errors that are reported before proceeding.
 
-   If you plan on using local backend **[NOT RECOMMENDED]**, to store the state file, then edit the `provider.tf` file and comment the backend section.
-   Then run `terraform init`
+If you plan on using *local backend* **[NOT RECOMMENDED]**, to store the state file, then edit the `provider.tf` file and comment the backend section.
+ 
+Then run `terraform init`
 
 6. Run `terraform plan -var-file=terraform.tfvars` to ensure there are no errors. Fix any errors before proceeding. 
 
