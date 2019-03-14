@@ -1,7 +1,7 @@
 # vcs-fitcycle-deployer 
 ---------------------
 ---------------------
-Version: 1.1
+Version: 1.2
 
 ## Getting Started 
 
