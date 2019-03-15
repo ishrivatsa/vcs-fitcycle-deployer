@@ -17,5 +17,5 @@ provider "aws" {
 # Here it is initialized with empty parameters. Other params can be passed at "terraform init --backend-config="bucket=mybucket" --backend-config="key=path/to/my/key/some.tfstate" --backend-config="region=us-east-1""
 
 terraform {
-   backend "s3" {}
+  backend "s3" {}
 }

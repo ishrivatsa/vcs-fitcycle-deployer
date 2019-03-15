@@ -130,11 +130,14 @@ resource "aws_route_table_association" "public_subnet_assoc" {
      route_table_id = "${aws_route_table.rtb.id}"
 }
 
-resource "aws_key_pair" "ssh_key" {
-      key_name   = "${var.option_5_aws_ssh_key_name}"
-      public_key = "${var.option_6_aws_public_ssh_key}"
+resource "aws_key_pair" "admin_ssh_key" {
+      key_name   = "${var.option_5_aws_admin_ssh_key_name}"
+      public_key = "${var.option_6_aws_admin_public_ssh_key}"
 }
-
+resource "aws_key_pair" "dev_ssh_key" {
+      key_name   = "${var.option_7_aws_dev_ssh_key_name}"
+      public_key = "${var.option_8_aws_dev_public_ssh_key}"
+}
 resource "aws_security_group" "mgmt_sg" {
      name   = "mgmt_${var.option_3_aws_vpc_name}"
      vpc_id = "${aws_vpc.vcs_vpc.id}"
@@ -313,7 +316,7 @@ resource "aws_instance" "db1" {
      instance_type          = "t2.micro"
      subnet_id              = "${aws_subnet.public_subnet.id}"
      vpc_security_group_ids = ["${aws_security_group.db_sg.id}"]
-     key_name               = "${aws_key_pair.ssh_key.id}"
+     key_name               = "${aws_key_pair.dev_ssh_key.id}"
      tags {
          App          = "${var.option_3_aws_vpc_name}"
          Name         = "db1-${var.option_3_aws_vpc_name}"
@@ -333,7 +336,7 @@ resource "aws_instance" "db2" {
      instance_type          = "t2.micro"
      subnet_id              = "${aws_subnet.public_subnet.id}"
      vpc_security_group_ids = ["${aws_security_group.db_sg.id}"]
-     key_name               = "${aws_key_pair.ssh_key.id}"
+     key_name               = "${aws_key_pair.dev_ssh_key.id}"
      tags {
          App          = "${var.option_3_aws_vpc_name}"
          Name         = "db2-${var.option_3_aws_vpc_name}"
@@ -354,7 +357,7 @@ resource "aws_instance" "dblb" {
      instance_type          = "t2.micro"
      subnet_id              = "${aws_subnet.public_subnet.id}"
      vpc_security_group_ids = ["${aws_security_group.db_sg.id}"]
-     key_name               = "${aws_key_pair.ssh_key.id}"
+     key_name               = "${aws_key_pair.dev_ssh_key.id}"
      tags {
          App          = "${var.option_3_aws_vpc_name}"
          Name         = "dblb-${var.option_3_aws_vpc_name}"
@@ -374,7 +377,7 @@ resource "aws_instance" "app1" {
      instance_type          = "t2.micro"
      subnet_id              = "${aws_subnet.public_subnet.id}"
      vpc_security_group_ids = ["${aws_security_group.app_sg.id}"]
-     key_name               = "${aws_key_pair.ssh_key.id}"
+     key_name               = "${aws_key_pair.dev_ssh_key.id}"
      tags {
          App          = "${var.option_3_aws_vpc_name}"
          Name         = "app1-${var.option_3_aws_vpc_name}"
@@ -394,7 +397,7 @@ resource "aws_instance" "app2" {
      instance_type          = "t2.micro"
      subnet_id              = "${aws_subnet.public_subnet.id}"
      vpc_security_group_ids = ["${aws_security_group.app_sg.id}"]
-     key_name               = "${aws_key_pair.ssh_key.id}"
+     key_name               = "${aws_key_pair.dev_ssh_key.id}"
      tags {
          App          = "${var.option_3_aws_vpc_name}"
          Name         = "app2-${var.option_3_aws_vpc_name}"
