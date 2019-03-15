@@ -1,7 +1,7 @@
 # vcs-fitcycle-deployer 
 ---------------------
 ---------------------
-Version: 1.2
+Version: 1.3
 
 ## Getting Started 
 
@@ -92,13 +92,13 @@ costcenter = "acmefitness-eng"
 
 ```
 
-4.[OPTIONAL] You may also set values for `option_5_aws_ssh_key_name` and `option_6_aws_public_ssh_key` within the `terraform.tfvars` file as 
+4.[OPTIONAL] You may also set values for `option_5_aws_admin_ssh_key_name`, `option_6_aws_admin_public_ssh_key`, `option_7_aws_dev_ssh_key_name`, `option_8_aws_dev_public_ssh_key` within the `terraform.tfvars` file as 
 shown below.
 
 **Note that doing so can result in an error ` Existing Key Pair`, as AWS doesnot allow creation of ssh keys with
 same key name.** 
 
-**Alternative to this is to just provide the `option_6_aws_public_ssh_key` in the `.tfvars` file and omit the `aws_ssh_key_name`
+**Alternative to this is to just provide the `option_6_aws_admin_public_ssh_key` and `option_8_aws_dev_punlic_ssh_key` in the `.tfvars` file and omit the `option_5_aws_admin_ssh_key_name` and `option_7_aws_dev_ssh_key_name`
 . By doing so, everytime terraform is run, you can provide a new `ssh key name`**
 
 ```
@@ -108,8 +108,12 @@ region = "us-east-1"
 
 option_3_aws_vpc_name = "fitcycleDemo"
 option_4_aws_vpc_cidr = "10.0.0.0/16"
-option_5_aws_ssh_key_name = "myTestKey"
-option_6_aws_public_ssh_key = " PASTE YOUR PUBLIC SSH KEY HERE - file ending with id_rsa.pub"
+option_5_aws_admin_ssh_key_name = "adminKey"
+option_6_aws_admin_public_ssh_key = " PASTE YOUR PUBLIC SSH KEY HERE - file ending with id_rsa.pub"
+
+option_7_aws_dev_ssh_key_name = "devKey"
+option_8_aws_dev_public_ssh_key = " PASTE YOUR PUBLIC SSH KEY HERE - file ending with id_rsa.pub"
+
 
 product = "fitcycle"
 team = "dev-team"
@@ -182,27 +186,27 @@ For example : `terraform apply -var-file=terraform.tfvars -var-file=us_west_1_te
 **For deployment with MySql on a VM and HA Proxy**
 
 ```
-var.option_7_use_rds_database = 0
-var.option_8_aws_rds_identifier = 0
-var.option_9_multi_az_rds = 0
+var.option_9_use_rds_database = 0
+var.option_10_aws_rds_identifier = 0
+var.option_11_multi_az_rds = 0
 
 ```
 
 **For deployment with AWS RDS - single az**
 
 ```
-var.option_7_use_rds_database = 1
-var.option_8_aws_rds_identifier = rdsFitcycle
-var.option_9_multi_az_rds = 0
+var.option_9_use_rds_database = 1
+var.option_10_aws_rds_identifier = rdsFitcycle
+var.option_11_multi_az_rds = 0
 
 ```
 
 **For deployment with AWS RDS - multi-az** [This deployment can take upto ~ 15 mins]
 
 ```
-var.option_7_use_rds_database = 1
-var.option_8_aws_rds_identifier = rdsFitcycle
-var.option_9_multi_az_rds = 1
+var.option_9_use_rds_database = 1
+var.option_10_aws_rds_identifier = rdsFitcycle
+var.option_11_multi_az_rds = 1
 
 ```
 
