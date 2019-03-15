@@ -35,7 +35,7 @@ resource "aws_subnet" "public_subnet" {
 
 
 resource "aws_subnet" "rds_subnet_1" {
-  count      = "${var.option_7_use_rds_database}"
+  count      = "${var.option_9_use_rds_database}"
   vpc_id     = "${aws_vpc.vcs_vpc.id}"
   cidr_block = "${cidrsubnet(aws_vpc.vcs_vpc.cidr_block, 8, 3)}"
   availability_zone = "${data.aws_availability_zones.available.names[0]}"
@@ -53,7 +53,7 @@ resource "aws_subnet" "rds_subnet_1" {
 
 
 resource "aws_subnet" "rds_subnet_2" {
-  count      = "${var.option_7_use_rds_database}"
+  count      = "${var.option_9_use_rds_database}"
   vpc_id     = "${aws_vpc.vcs_vpc.id}"
   cidr_block = "${cidrsubnet(aws_vpc.vcs_vpc.cidr_block, 8, 4)}"
   availability_zone = "${data.aws_availability_zones.available.names[1]}"
@@ -71,7 +71,7 @@ resource "aws_subnet" "rds_subnet_2" {
 
 
 resource "aws_db_subnet_group" "rds_subnet_group" {
-  count      = "${var.option_7_use_rds_database}"
+  count      = "${var.option_9_use_rds_database}"
   name       = "rds-fitcycle"
   subnet_ids = ["${aws_subnet.rds_subnet_1.id}", "${aws_subnet.rds_subnet_2.id}"]
 
@@ -280,8 +280,8 @@ resource "aws_security_group" "db_sg" {
 
 
 resource "aws_db_instance" "fitcycle_rds_db" {
-  count                  = "${var.option_7_use_rds_database}"
-  identifier             = "${var.option_8_aws_rds_identifier}"
+  count                  = "${var.option_9_use_rds_database}"
+  identifier             = "${var.option_10_aws_rds_identifier}"
   depends_on             = ["aws_security_group.db_sg"]
   allocated_storage      = 20
   storage_type           = "gp2"
@@ -291,7 +291,7 @@ resource "aws_db_instance" "fitcycle_rds_db" {
   name                   = "prospect"
   username               = "db_app_user"
   password               = "VMware1!"
-  multi_az               = "${var.option_9_multi_az_rds}"
+  multi_az               = "${var.option_11_multi_az_rds}"
   vpc_security_group_ids = ["${aws_security_group.db_sg.id}"]
   db_subnet_group_name   = "${aws_db_subnet_group.rds_subnet_group.id}"
   skip_final_snapshot    = true
@@ -311,7 +311,7 @@ resource "aws_db_instance" "fitcycle_rds_db" {
 
 
 resource "aws_instance" "db1" {
-     count                  = "${1 - var.option_7_use_rds_database}"
+     count                  = "${1 - var.option_9_use_rds_database}"
      ami                    = "${var.images["db"]}"
      instance_type          = "t2.micro"
      subnet_id              = "${aws_subnet.public_subnet.id}"
@@ -331,7 +331,7 @@ resource "aws_instance" "db1" {
 }
 
 resource "aws_instance" "db2" {
-     count                  = "${1 - var.option_7_use_rds_database}"
+     count                  = "${1 - var.option_9_use_rds_database}"
      ami                    = "${var.images["db"]}"
      instance_type          = "t2.micro"
      subnet_id              = "${aws_subnet.public_subnet.id}"
@@ -352,7 +352,7 @@ resource "aws_instance" "db2" {
 
 
 resource "aws_instance" "dblb" {
-     count                  = "${1 - var.option_7_use_rds_database}"
+     count                  = "${1 - var.option_9_use_rds_database}"
      ami                    = "${var.images["dblb"]}"
      instance_type          = "t2.micro"
      subnet_id              = "${aws_subnet.public_subnet.id}"
