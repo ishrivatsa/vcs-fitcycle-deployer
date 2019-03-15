@@ -417,7 +417,7 @@ resource "aws_instance" "web1" {
      instance_type               = "t2.micro"
      subnet_id                   = "${aws_subnet.public_subnet.id}"
      vpc_security_group_ids      = ["${aws_security_group.web_sg.id}"]
-     key_name                    = "${aws_key_pair.ssh_key.id}"
+     key_name                    = "${aws_key_pair.dev_ssh_key.id}"
      associate_public_ip_address = true
      tags {
           App          = "${var.option_3_aws_vpc_name}"
@@ -438,7 +438,7 @@ resource "aws_instance" "web2" {
      instance_type               = "t2.micro"
      subnet_id                   = "${aws_subnet.public_subnet.id}"
      vpc_security_group_ids      = ["${aws_security_group.web_sg.id}"]
-     key_name                    = "${aws_key_pair.ssh_key.id}"
+     key_name                    = "${aws_key_pair.dev_ssh_key.id}"
      associate_public_ip_address = true
      tags {
           App           = "${var.option_3_aws_vpc_name}"
@@ -459,7 +459,7 @@ resource "aws_instance" "api1" {
      instance_type          = "t2.micro"
      subnet_id              = "${aws_subnet.public_subnet.id}"
      vpc_security_group_ids = ["${aws_security_group.api_sg.id}"]
-     key_name               = "${aws_key_pair.ssh_key.id}"
+     key_name               = "${aws_key_pair.dev_ssh_key.id}"
      tags {
           App           = "${var.option_3_aws_vpc_name}"
           Name          = "api1-${var.option_3_aws_vpc_name}"
@@ -481,7 +481,7 @@ resource "aws_instance" "api2" {
      instance_type          = "t2.micro"
      subnet_id              = "${aws_subnet.public_subnet.id}"
      vpc_security_group_ids = ["${aws_security_group.api_sg.id}"]
-     key_name               = "${aws_key_pair.ssh_key.id}"
+     key_name               = "${aws_key_pair.dev_ssh_key.id}"
      tags {
           App           = "${var.option_3_aws_vpc_name}"
           Name          = "api2-${var.option_3_aws_vpc_name}"
@@ -501,7 +501,7 @@ resource "aws_instance" "mgmt" {
      instance_type               = "t2.medium"
      subnet_id                   = "${aws_subnet.public_subnet.id}"
      vpc_security_group_ids      = ["${aws_security_group.mgmt_sg.id}"]
-     key_name                    = "${aws_key_pair.ssh_key.id}"
+     key_name                    = "${aws_key_pair.admin_ssh_key.id}"
      associate_public_ip_address = true
      tags {
           App           = "${var.option_3_aws_vpc_name}"
