@@ -23,7 +23,7 @@ Terraform Version: 0.11.0 +
 Ensure the correct AMIs are available in the region where the application needs to be deployed. Currently the AMIs
 are available in the following region(s)
 
-**Note: These AMIs are private. For access to these images, contact Bill Shetti, Prabhu Barathi or Shrivatsa Upadhye**
+**Note: These AMIs are private. For access to these images, contact Bill Shetti or Shrivatsa Upadhye**
 
 ### Fitcycle AMIs
 
