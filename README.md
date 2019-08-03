@@ -18,7 +18,7 @@ See notes below for troubleshooting.
 
 ## Requirements:
 
-Terraform Version: 0.11.0 +
+Terraform Version: 0.11.0
 
 Ensure the correct AMIs are available in the region where the application needs to be deployed. Currently the AMIs
 are available in the following region(s)
