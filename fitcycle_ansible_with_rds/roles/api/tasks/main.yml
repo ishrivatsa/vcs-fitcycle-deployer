@@ -21,6 +21,14 @@
 - name: Start API server
   shell: ./startapi.sh & chdir=/home/ubuntu/api_server
 
+- name: Set API Key for Snyk
+  shell: "snyk config set api={{ snyk_api_key }}"
+
+- name: Monitor with Snyk
+  command: snyk monitor
+  args:
+    chdir: /home/ubuntu/api_server
+
 - name: App is deployed and ready
   debug:
     msg: "App load balanced at following IPs: {{ groups['WEB'] }}"

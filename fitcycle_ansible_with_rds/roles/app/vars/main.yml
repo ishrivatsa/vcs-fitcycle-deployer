@@ -1,2 +1,3 @@
 ---
 # vars file for app
+snyk_api_key: ''

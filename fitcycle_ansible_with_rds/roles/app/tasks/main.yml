@@ -20,6 +20,14 @@
   run_once: true
   register: migrate_app
 
+- name: Set API Key for Snyk
+  shell: "snyk config set api={{ snyk_api_key }}"
+
+- name: Monitor with Snyk
+  command: snyk monitor
+  args:
+    chdir: /home/ubuntu/fitcycle
+
 - name: Restart fitcycle app
   shell: nohup ./startfitcycle.sh & chdir=/home/ubuntu/fitcycle
   register: fitout
