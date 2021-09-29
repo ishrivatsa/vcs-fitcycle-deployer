@@ -1,10 +1,16 @@
 # Variables for accepting Access Key and Secret key for AWS
 # Default region is set to us-east-1
 
-variable "option_1_aws_access_key" {
+# variable "option_1_aws_access_key" {
+# }
+
+# variable "option_2_aws_secret_key" {
+# }
+
+variable "shared_credentials_file_location" {
 }
 
-variable "option_2_aws_secret_key" {
+variable "profile" {
 }
 
 variable "region" {
