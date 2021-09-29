@@ -1,12 +1,11 @@
 # vcs-fitcycle-deployer 
 ---------------------
 ---------------------
-Version: 1.3
+Version: 1.4
 
 ## Getting Started 
 
-These instructions will allow you to get a copy of the project and deploy Fitcycle application in AWS. It will
-also configure the instances. 
+These instructions will allow you to get a copy of the project and deploy Fitcycle application in AWS. It will also configure the instances. 
 
 The app can be deployed with 2 different architectures
 
@@ -18,7 +17,7 @@ See notes below for troubleshooting.
 
 ## Requirements:
 
-Terraform Version: 0.12+ 
+Terraform Version: 1.0 + 
 
 Ensure the correct AMIs are available in the region where the application needs to be deployed. Currently the AMIs
 are available in the following region(s)
@@ -56,7 +55,13 @@ are available in the following region(s)
 
 2. It contains 3 directories - `fitcycle_ansible` , `fitcycle_ansible_with_rds` and `fitcycle_terraform`. Change directory to ` fitcycle_terraform`
 
-3. Create a file name `terraform.tfvars` and populate it with the values listed below. You can also add additional
+3. Configure either AWS Profile or create a role within AWS to assume (You will need Role ARN for this). In this version, we will use AWS Profile. Avoid using AWS Secret Key and Access key directly within the terraform file. Run the following command:
+
+`aws configure --profile demo`
+
+Provide the access key and secret key when prompted. You can get these values from AWS. The credentials will then be stored at /Users/your_machine_username/.aws/credentials
+
+4. Create a file name `terraform.tfvars` and populate it with the values listed below. You can also add additional
 variable values in this file (See Step 4)
 
 Ensure that aws_vpc_cidr is a /8, /12, /16 network which is in accordance with RFC 1918
@@ -74,8 +79,10 @@ Ensure that aws_vpc_cidr is a /8, /12, /16 network which is in accordance with R
 terraform.tfvars file
 
 ```
-option_1_aws_access_key = " "    
-option_2_aws_secret_key = " "
+
+shared_credentials_file_location = "/Users/Joe/.aws/credentials"
+profile = demo 
+
 region = "us-east-1"
 
 option_3_aws_vpc_name = "fitcycleDemo"
@@ -86,11 +93,10 @@ team = "dev-team"
 owner = "teamlead"
 environment = "staging"
 organization = "acmefitness"
-costcenter = "acmefitness-eng"
-
+costcenter = "acmefitness-eng" 
 ```
 
-4.[OPTIONAL] You may also set values for `option_5_aws_admin_ssh_key_name`, `option_6_aws_admin_public_ssh_key`, `option_7_aws_dev_ssh_key_name`, `option_8_aws_dev_public_ssh_key` within the `terraform.tfvars` file as 
+5.[OPTIONAL] You may also set values for `option_5_aws_admin_ssh_key_name`, `option_6_aws_admin_public_ssh_key`, `option_7_aws_dev_ssh_key_name`, `option_8_aws_dev_public_ssh_key` within the `terraform.tfvars` file as 
 shown below.
 
 **Note that doing so can result in an error ` Existing Key Pair`, as AWS doesnot allow creation of ssh keys with
@@ -100,8 +106,9 @@ same key name.**
 . By doing so, everytime terraform is run, you can provide a new `ssh key name`**
 
 ```
-option_1_aws_access_key = " "
-option_2_aws_secret_key = " "
+shared_credentials_file_location = "/Users/Joe/.aws/credentials"
+profile = demo 
+
 region = "us-east-1"
 
 option_3_aws_vpc_name = "fitcycleDemo"
@@ -126,8 +133,9 @@ costcenter = "acmefitness-eng"
 In this example, we are updating the region and the AMI IDs for that specific region.
 
 ```
-option_1_aws_access_key = " "
-option_2_aws_secret_key = " "
+shared_credentials_file_location = "/Users/Joe/.aws/credentials"
+profile = demo 
+
 region = "us-west-1"
 
 images = {
@@ -152,7 +160,7 @@ costcenter = "acmefitness-eng"
 
 ```
 
-5. If you plan on using ***remote backend***, such as S3, to store the state file, then Run 
+6. If you plan on using ***remote backend***, such as S3, to store the state file, then Run 
 
 `terraform init --backend-config="bucket=mybucket" --backend-config="key=path/to/my/key/some.tfstate" --backend-config="region=us-east-1"` 
 
@@ -164,9 +172,9 @@ If you plan on using *local backend* **[NOT RECOMMENDED]**, to store the state f
  
 Then run `terraform init`
 
-6. Run `terraform plan -var-file=terraform.tfvars` to ensure there are no errors. Fix any errors before proceeding. 
+7. Run `terraform plan -var-file=terraform.tfvars` to ensure there are no errors. Fix any errors before proceeding. 
 
-7. Run `terraform apply -var-file=terraform.tfvars -state=terraform.tfstate` to deploy your infrastructure. 
+8. Run `terraform apply -var-file=terraform.tfvars -state=terraform.tfstate` to deploy your infrastructure. 
 
 **It's best to provide a state file path `-state=<FILE_PATH>` , if you are planing to deploy multiple instances 
 of the entire infra**
@@ -179,7 +187,7 @@ of the entire infra**
 For example : `terraform apply -var-file=terraform.tfvars -var-file=us_west_1_terraform.tfvars`
 
 
-8. Enter the values for various variables when prompted
+9. Enter the values for various variables when prompted
 
 **For deployment with MySql on a VM and HA Proxy**
 
@@ -208,7 +216,7 @@ var.option_11_multi_az_rds = 1
 
 ```
 
-9. Once **Terraform** has successfuly completed execution, wait for coupe of minutes and then SSH into the management VM 
+10. Once **Terraform** has successfuly completed execution, wait for coupe of minutes and then SSH into the management VM 
 or the jumpbox. 
 
 You can login into your AWS console to get the Public IP address for the Management (mgmt) box or you can run the
@@ -224,17 +232,17 @@ web2_public_ip = 35.173.211.14
 
 ```
 
-10. The mgmt/jumpbox is pre-baked with the ansible templates. 
+11. The mgmt/jumpbox is pre-baked with the ansible templates. 
 
 **Change the directory to `fitcycle_ansible`** for deployment with MySQL and HA Proxy 
 
 **Change the directory to `fitcycle_ansible_with_rds`** for deployment with AWS RDS
 
-11. Edit the file export_keys.sh and provide the details for AWS ACCESS KEY and AWS SECRET ACCESS KEY. Then 
+12. Edit the file export_keys.sh and provide the details for AWS ACCESS KEY and AWS SECRET ACCESS KEY. Then 
 
 Run the command `source export_keys.sh`
 
-12. Update the `inventory/hosts.aws_ec2.yaml` file for the specific region in which the deployment occurs. 
+13. Update the `inventory/hosts.aws_ec2.yaml` file for the specific region in which the deployment occurs. 
  
 ```
 plugin: aws_ec2
@@ -249,7 +257,7 @@ filters:
 
 ```
 
-13. Run this command
+14. Run this command
 
     **For MySql based deployment**
 
@@ -261,13 +269,13 @@ filters:
      `ansible-playbook -i inventory/hosts.aws_ec2.yaml -i inventory/hosts.aws_rds.yaml configure_fitcycle.yml -e 'db_user=db_app_user db_password=VMware1!' -vvv`
 
 
-14. Once ansible completes configuring successfully, you can go to a web browser and access the app with any of the 
+15. Once ansible completes configuring successfully, you can go to a web browser and access the app with any of the 
 public IP addresses of the **web** VM.
 
 
 ## Destroying the infrastructure
 
-15.  Run the command `terraform destroy -var-file=terraform.tfvars -state=terraform.tfstate --auto-approve`
+16.  Run the command `terraform destroy -var-file=terraform.tfvars -state=terraform.tfstate --auto-approve`
      - If prompted for any input variable provide the values.  This is currently a bug with terraform.
 
 
