@@ -2,8 +2,15 @@
 # It will use RDS instance to deploy 
 # Set the AWS Access and Secret Key
 
+# Enable this only when using Access Key and Secret Key
 #option_1_aws_access_key = ""    
 #option_2_aws_secret_key = ""
+
+# Use these variable when use shared credential file - i,e: with aws credentials file . Refer to README for steps
+#shared_credentials_file_location = "/Users/demo/.aws/credentials"
+# The profile name is the value you provided in this command - 'aws configure --profile demo'
+#profile = "demo" 
+
 region = "us-east-1"
 
 option_3_aws_vpc_name = "fitcycleDemo"
